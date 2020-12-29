@@ -1,0 +1,98 @@
+body{
+    font-family: 'Open Sans',sans-serif;
+    background-color: #ffff80;
+}
+
+.container{
+    widows: 950px;
+    height: 555px;
+    background-size: cover;
+    background-image: url("cc.jpg");
+    background-repeat: no-repeat;
+    margin: 25px ;
+    background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(cc.jpg);
+}
+
+.calculator{
+	width: 325px;
+	height: 535px;
+	background-color: #eaedef;
+    margin:  auto;
+    top: 7px;
+	position: relative;
+	border-radius: 8px;
+	box-shadow: 0 6px 9px 0px rgba(0, 0, 0, 0.2), 0 8px 23px 0 rgba(0, 0, 0, 0.19);
+}
+.result{
+    height: 125px;
+    
+}
+.history{
+    text-align: right;
+	margin: 0 25px;
+    font-size: 17px;
+    padding-top: 20px;
+	color: #919191;
+}
+#output{
+    text-align: right;
+	height: 65px;
+	margin: 10px 20px;
+	font-size: 35px;
+}
+.buttons{
+    height: 400px;
+    text-align: right;
+}
+
+.operator, .number,.toggle,.operatorequal{
+	width: 50px;
+	height: 40px;
+    margin: 15px;
+    font-weight: bold;
+	font-size: 15px;
+	float: left;
+	border-radius: 50%;
+    border-width: 0;
+    background-color: #979899;
+	
+}
+.number, .operator,.toggle,.operatorequal{
+	cursor: pointer;
+}
+
+.number,.toggle{
+	background-color: #eaedef;
+}
+.operator:active, .number:active,.toggle:active,.operatorequal:active{
+	font-size: 11px;
+}
+/*
+delete line arround the buttons
+*/
+.operator:focus, .number:focus,.toggle:focus,.operatorequal:focus{
+	outline: 0;
+}
+
+
+
+button:nth-child(5){
+	font-size: 20px;
+	background-color: #f08080;
+}
+button:nth-child(9){
+	font-size: 20px;
+	background-color: #ffa500;
+}
+button:nth-child(13){
+	font-size: 20px;
+	background-color: #9477af;
+}
+button:nth-child(17){
+	font-size: 20px;
+	background-color: #7d93e0;
+}
+#equalsign{
+	font-size: 20px;
+	background-color: #20b2aa;
+}

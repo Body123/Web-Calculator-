@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="windows-1256"></meta>
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/custom.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="calculator">
+        	
+            <div class="result">
+                <div class="history">
+                    <p id="history class"></p>
+                </div>
+                <div id="output">
+                        
+                </div>
+            </div>
+            <div class="buttons">
+            		
+                    
+                    <button class="operator" id="backspace">CE</button>
+                    <button class="operator" id="clear">C</button>
+                    <button class="operator" id="arrow">&#x2190;</button>
+                    
+                    <div id="specialOperator">
+                    <button class="operator"  v-on:click="percent"id="%">%</button>
+                    <button class="operator" v-on:click="oneOverX">1/x</button>
+
+                    
+                    <button class="operator"  v-on:click="square">x&#x00B2;</button>
+                    
+                    <button class="operator" v-on:click="squareroot" >&#x221a;x</button>
+                    </div>
+                    <button class="operator" id="/">&#247;</button>
+                    
+                    
+
+					<button class="number" id="7">7</button>
+					<button class="number" id="8">8</button>
+					<button class="number" id="9">9</button>
+					<button class="operator" id="*">&times;</button>
+					<button class="number" id="4">4</button>
+					<button class="number" id="5">5</button>
+					<button class="number" id="6">6</button>
+					<button class="operator" id="-">-</button>
+					<button class="number" id="1">1</button>
+					<button class="number" id="2">2</button>
+					<button class="number" id="3">3</button>
+					<button class="operator" id="+">+</button>
+					<button class="number" id=".">.</button>
+					<button class="number"  id="0">0</button>
+					<div id="operatorequal" >
+					<button  v-on:click="toggle" class="toggle">+/-</button>
+					<button class="operatorequal" v-on:click="equal" id="equalsign">=</button>
+					</div>
+                
+            </div>
+        </div>
+
+    </div>
+    
+    <script type="text/javascript" src="/js/custom.js"></script>
+    
+    
+    
+    
+   <script 
+  src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js">
+</script>
+<script 
+  src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js">
+</script>
+
+
+
+<script type="text/babel">
+var z=" ";
+    new Vue({
+
+  el: '#operatorequal',
+  data() {
+
+	return{
+		info:[],
+		
+	}
+    
+  },
+  // define methods under the `methods` object
+  methods: {
+    equal() {
+		
+		var history =(getHistory().trim()+getOutput().trim()).replaceAll("+", "%2B");
+		if(history==="Invalid Expression"){
+			alert("Invalid Expression");
+			printOutput("");
+		}
+		if(history!=""&&history!="Invalid Expression"){
+      axios
+      .get('http://localhost:8085/eual?exp='+history)
+      .then((response)=>{
+			this.info=response;
+			z=this.info.data;
+			document.getElementById("output").innerHTML=(z);
+		});
+			var history=document.getElementById("history class").innerHTML;
+			document.getElementById("history class").innerHTML=" ";
+			
+			
+	}		
+    },
+	toggle() {
+		
+	var output=getOutput().trim();
+	if(output!=""){
+      axios
+      .get('http://localhost:8085/toggle?toggle='+output)
+      .then((response)=>{
+			this.info=response;
+			z=this.info.data;
+			console.log(z);
+			printOutput(z);
+		});
+}
+		},
+
+	
+  }
+});
+
+
+
+
+</script>
+<script type="text/babel">
+var z=" ";
+    new Vue({
+
+  el: '#specialOperator',
+  data() {
+
+	return{
+		inverse:"",
+		
+	}
+    
+  },
+  // define methods under the `methods` object
+  methods: {
+    square() {
+		
+	var output=getOutput().trim();
+	if(output!=""){
+      axios
+      .get('http://localhost:8085/square?square='+output)
+      .then((response)=>{
+			this.info=response;
+			z=this.info.data;
+			console.log(z);
+			printOutput(z);
+		});
+}
+		},
+squareroot() {
+		
+	var output=getOutput().trim();
+	if(output!=""){
+      axios
+      .get('http://localhost:8085/squareroot?squareroot='+output)
+      .then((response)=>{
+			this.info=response;
+			z=this.info.data;
+			console.log(z);
+			printOutput(z);
+		});
+}
+		},
+		
+	oneOverX() {
+		
+	var output=getOutput().trim();
+	if(output!=""){
+      axios
+      .get('http://localhost:8085/oneOverX?oneOverX='+output)
+      .then((response)=>{
+			this.info=response;
+			z=this.info.data;
+			console.log(z);
+			printOutput(z);
+		});
+}
+		},
+
+	percent() {
+		
+	var output=getOutput().trim();
+	if(output!=""){
+      axios
+      .get('http://localhost:8085/percent?percent='+output)
+      .then((response)=>{
+			this.info=response;
+			z=this.info.data;
+			console.log(z);
+			printOutput(z);
+		});
+}
+		},
+
+	
+  }
+});
+
+
+
+
+</script>
+
+
+
+
+    
+
+</body>
+</html>
